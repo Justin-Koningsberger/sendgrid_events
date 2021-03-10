@@ -1,3 +1,4 @@
 Rails.application.routes.draw do
-  # post '/endpoint' => 'incoming_emails#create'
+  get '/sg_events', to: "sg_events#index"
+  # post '/endpoint', to: 'sg_event#create'
 end

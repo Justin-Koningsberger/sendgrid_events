@@ -1,0 +1,14 @@
+<div>
+  <p>Hello world</p>
+</div>
+
+<h1>SG events:</h1>
+<div>
+  <% @sg_events.each do |sg_event| %>
+    <div>
+      <p>
+        email adress: <%= sg_event.email %>
+      </p>
+    </div>
+  <% end %>
+</div>
