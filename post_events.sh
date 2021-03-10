@@ -2,7 +2,7 @@
 
 HOSTNAME="http://localhost:3000"
 
-echo "Posting events.json to $HOSTNAME"
+echo "Posting events.json to $HOSTNAME/endpoint"
 
 counter=1
 
