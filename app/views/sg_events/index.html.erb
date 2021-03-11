@@ -7,6 +7,11 @@
   <%= submit_tag "Search" %>
 <% end %>
 
+<%= form_tag(search_path, :method => "get") do %>
+  <%= text_field_tag :filter, params[:filter], placeholder: "Filter events by status" %>
+  <%= submit_tag "Filter" %>
+<% end %>
+
 <div>
   <% @sg_events.each do |sg_event| %>
     <div>

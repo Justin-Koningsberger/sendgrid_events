@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20210311132553) do
+ActiveRecord::Schema.define(version: 20210311153605) do
 
   create_table "sg_events", force: :cascade do |t|
     t.string "email", null: false
@@ -24,6 +24,7 @@ ActiveRecord::Schema.define(version: 20210311132553) do
     t.string "tls"
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
+    t.string "reason"
     t.index ["sg_event_id"], name: "index_sg_events_on_sg_event_id", unique: true
   end
 

@@ -14,6 +14,8 @@ class SgEventsController < ApplicationController
   def index
     if params[:search]
       @sg_events = SgEvent.where('lower(sg_events.email) LIKE ?', "%#{params[:search]}%")
+    elsif params[:filter]
+      @sg_events = SgEvent.where('lower(sg_events.status) LIKE ?', "%#{params[:filter]}%")
     else
       @sg_events = SgEvent.all
     end
@@ -35,9 +37,11 @@ class SgEventsController < ApplicationController
     # # params may need to be params[:_json]
     # if verify_signature(public_key, params, signature, timestamp)
       data = params[:_json].first
-
-      remove_hard_bounced_mail_addresses()
       
+      unless data['event'].nil? || data['reason'].nil?
+        remove_hard_bounced_mail_addresses(data['event'], data['reason'], data['email'])
+      end
+
       sg_event = SgEvent.create(
         :email => data['email'],
         :smtp_id => data['smtp-id'],
@@ -46,8 +50,9 @@ class SgEventsController < ApplicationController
         :category => data['category'],
         :status => data['event'],
         :ip => data['ip'],
-        :response => data['.response'],
-        :tls => data['tls']
+        :response => data['response'],
+        :tls => data['tls'],
+        :reason => data['reason']
       )
     # end
   end
