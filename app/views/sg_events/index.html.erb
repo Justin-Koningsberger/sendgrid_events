@@ -1,11 +1,17 @@
 <h1>SG events:
-  <%= @sg_events.count %>
+  <%= @sg_events.count unless @sg_events.nil? %>
 </h1>
+
+<%= form_tag(search_path, :method => "get") do %>
+  <%= text_field_tag :search, params[:search], placeholder: "Search events by email address" %>
+  <%= submit_tag "Search" %>
+<% end %>
+
 <div>
   <% @sg_events.each do |sg_event| %>
     <div>
       <p>
-        email adress: <%= sg_event.email %>
+        email address: <%= sg_event.email %>
       </p>
     </div>
   <% end %>

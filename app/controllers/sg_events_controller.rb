@@ -12,7 +12,11 @@ class SgEventsController < ApplicationController
 
   # GET /sg_events
   def index
-    @sg_events = SgEvent.all
+    if params[:search]
+      @sg_events = SgEvent.where('lower(sg_events.email) LIKE ?', "%#{params[:search]}%")
+    else
+      @sg_events = SgEvent.all
+    end
 
     respond_to do |format|
       format.html
@@ -28,6 +32,7 @@ class SgEventsController < ApplicationController
     # public_key = convert_public_key_to_ecdsa(ENV[VERIFICATION_KEY])
     # timestamp = request.headers[TIMESTAMP]
 
+    # # params may need to be params[:_json]
     # if verify_signature(public_key, params, signature, timestamp)
       data = params[:_json].first
 
