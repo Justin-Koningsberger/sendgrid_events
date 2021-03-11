@@ -1,0 +1,12 @@
+<p>
+  <strong>Sender:</strong> <%= @sg_event.email %><br>
+  sg_event_id: <%= @sg_event.sg_event_id %><br>
+  sg_message_id: <%= @sg_event.sg_message_id %><br>
+  category: <%= @sg_event.category %><br>
+  status: <%= @sg_event.status %><br>
+  response: <%= @sg_event.response %><br>
+  ip: <%= @sg_event.ip %><br>
+  tls: <%= @sg_event.tls %><br>
+</p>
+
+<%= link_to 'Back', sg_events_path %>

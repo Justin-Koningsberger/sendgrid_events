@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20210310123233) do
+ActiveRecord::Schema.define(version: 20210311085520) do
 
   create_table "sg_events", force: :cascade do |t|
     t.string "email", null: false
@@ -18,12 +18,13 @@ ActiveRecord::Schema.define(version: 20210310123233) do
     t.string "sg_event_id"
     t.string "sg_message_id"
     t.string "category"
-    t.string "status"
+    t.string "status", null: false
     t.string "ip"
     t.string "response"
     t.string "tls"
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
+    t.index ["sg_event_id"], name: "index_sg_events_on_sg_event_id", unique: true
   end
 
 end
