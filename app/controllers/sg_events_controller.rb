@@ -8,6 +8,7 @@ class SgEventsController < ApplicationController
 
   SIGNATURE = "HTTP_X_TWILIO_EMAIL_EVENT_WEBHOOK_SIGNATURE".freeze
   TIMESTAMP = "HTTP_X_TWILIO_EMAIL_EVENT_WEBHOOK_TIMESTAMP".freeze
+  VERIFICATION_KEY = "SENDGRID-WEBHOOK-VERIFICATION-KEY".freeze
 
   # GET /sg_events
   def index
@@ -24,7 +25,7 @@ class SgEventsController < ApplicationController
 
     # return unless request.headers[SIGNATURE]
     # signature = request.headers[SIGNATURE]
-    # public_key = convert_public_key_to_ecdsa(ENV['SENDGRID-API-KEY'])
+    # public_key = convert_public_key_to_ecdsa(ENV[VERIFICATION_KEY])
     # timestamp = request.headers[TIMESTAMP]
 
     # if verify_signature(public_key, params, signature, timestamp)
