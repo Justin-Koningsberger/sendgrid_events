@@ -36,6 +36,8 @@ class SgEventsController < ApplicationController
     # if verify_signature(public_key, params, signature, timestamp)
       data = params[:_json].first
 
+      remove_hard_bounced_mail_addresses()
+      
       sg_event = SgEvent.create(
         :email => data['email'],
         :smtp_id => data['smtp-id'],
@@ -60,6 +62,14 @@ class SgEventsController < ApplicationController
   end
 
   private
+  def remove_hard_bounced_mail_addresses(event, reason, email)
+    if event == 'bounce' &&  reason.start_with(550.to_s)
+      # I don't know exactly where/how you store email addresses,
+      # but I would call something like db.delete(email), or don't
+      # delete the address and mark it as non-existant
+    end
+  end
+
   class Error < ::RuntimeError
   end
 
