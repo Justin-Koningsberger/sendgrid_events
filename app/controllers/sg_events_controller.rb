@@ -37,22 +37,25 @@ class SgEventsController < ApplicationController
     # # params may need to be params[:_json]
     # if verify_signature(public_key, params, signature, timestamp)
       data = params[:_json].first
+      event = data['event']
+      reason = data['reason']
+      email = data['email']
       
-      unless data['event'].nil? || data['reason'].nil?
-        remove_hard_bounced_mail_addresses(data['event'], data['reason'], data['email'])
+      unless event.nil? || reason.nil?
+        remove_hard_bounced_mail_addresses(event, reason, email)
       end
 
       sg_event = SgEvent.create(
-        :email => data['email'],
+        :email => email,
         :smtp_id => data['smtp-id'],
         :sg_event_id => data['sg_event_id'],
         :sg_message_id => data['sg_message_id'],
         :category => data['category'],
-        :status => data['event'],
+        :status => event,
         :ip => data['ip'],
         :response => data['response'],
         :tls => data['tls'],
-        :reason => data['reason']
+        :reason => reason
       )
     # end
   end
